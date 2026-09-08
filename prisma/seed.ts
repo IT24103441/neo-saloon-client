@@ -10,7 +10,16 @@ const prisma = new PrismaClient({
     adapter,
 });
 
-const userData: Prisma.UserCreateInput[] = [];
+const userData: Prisma.UserCreateInput[] = [
+    {
+        email: "admin@saloonleo.lk",
+        firstName: "Admin",
+        lastName: "neo",
+        password: "$2a$12$9RXzHwm8mgvKRWSL9PNy7ufYeorbcE.jTf.dyuoXcGeNxel9D.ea2",
+        role: "ADMIN",
+        privileges: []
+    }
+];
 
 export async function main() {
     for (const u of userData) {
