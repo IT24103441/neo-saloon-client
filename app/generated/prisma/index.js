@@ -93,31 +93,9 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.StudentScalarFieldEnum = {
-  email: 'email',
-  name: 'name',
-  city: 'city'
-};
-
-exports.Prisma.CourseScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-};
-
-exports.Prisma.SortOrder = {
-  asc: 'asc',
-  desc: 'desc'
-};
-
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-};
-
 
 exports.Prisma.ModelName = {
-  Student: 'Student',
-  Course: 'Course'
+
 };
 /**
  * Create the Client
@@ -127,14 +105,14 @@ const config = {
   "clientVersion": "7.10.0",
   "engineVersion": "0edf323efd1d98336f3f0a68684b56f689b900d3",
   "activeProvider": "postgresql",
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Student {\n  email String @id\n  name  String\n  city  String\n}\n\nmodel Course {\n  id   String @id\n  name String\n}\n"
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n"
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Student\":{\"fields\":[{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"city\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null,\"schema\":null},\"Course\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null,\"schema\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.parameterizationSchema = {
-  strings: JSON.parse("[\"where\",\"Student.findUnique\",\"Student.findUniqueOrThrow\",\"orderBy\",\"cursor\",\"Student.findFirst\",\"Student.findFirstOrThrow\",\"Student.findMany\",\"data\",\"Student.createOne\",\"Student.createMany\",\"Student.createManyAndReturn\",\"Student.updateOne\",\"Student.updateMany\",\"Student.updateManyAndReturn\",\"create\",\"update\",\"Student.upsertOne\",\"Student.deleteOne\",\"Student.deleteMany\",\"having\",\"_count\",\"_min\",\"_max\",\"Student.groupBy\",\"Student.aggregate\",\"Course.findUnique\",\"Course.findUniqueOrThrow\",\"Course.findFirst\",\"Course.findFirstOrThrow\",\"Course.findMany\",\"Course.createOne\",\"Course.createMany\",\"Course.createManyAndReturn\",\"Course.updateOne\",\"Course.updateMany\",\"Course.updateManyAndReturn\",\"Course.upsertOne\",\"Course.deleteOne\",\"Course.deleteMany\",\"Course.groupBy\",\"Course.aggregate\",\"AND\",\"OR\",\"NOT\",\"id\",\"name\",\"equals\",\"in\",\"notIn\",\"lt\",\"lte\",\"gt\",\"gte\",\"contains\",\"startsWith\",\"endsWith\",\"not\",\"email\",\"city\",\"set\"]"),
-  graph: "QhEgBioAADsAMCsAAAQAECwAADsAMC4BADkAIToBAAAAATsBADkAIQEAAAABACABAAAAAQAgBioAADsAMCsAAAQAECwAADsAMC4BADkAIToBADkAITsBADkAIQADAAAABAAgAwAABQAwBAAAAQAgAwAAAAQAIAMAAAUAMAQAAAEAIAMAAAAEACADAAAFADAEAAABACADLgEAAAABOgEAAAABOwEAAAABAQgAAAkAIAMuAQAAAAE6AQAAAAE7AQAAAAEBCAAACwAwAQgAAAsAMAMuAQA_ACE6AQA_ACE7AQA_ACECAAAAAQAgCAAADgAgAy4BAD8AIToBAD8AITsBAD8AIQIAAAAEACAIAAAQACACAAAABAAgCAAAEAAgAwAAAAEAIA8AAAkAIBAAAA4AIAEAAAABACABAAAABAAgAxUAAEAAIBYAAEIAIBcAAEEAIAYqAAA6ADArAAAXABAsAAA6ADAuAQA0ACE6AQA0ACE7AQA0ACEDAAAABAAgAwAAFgAwFAAAFwAgAwAAAAQAIAMAAAUAMAQAAAEAIAUqAAA4ADArAAAdABAsAAA4ADAtAQAAAAEuAQA5ACEBAAAAGgAgAQAAABoAIAUqAAA4ADArAAAdABAsAAA4ADAtAQA5ACEuAQA5ACEAAwAAAB0AIAMAAB4AMAQAABoAIAMAAAAdACADAAAeADAEAAAaACADAAAAHQAgAwAAHgAwBAAAGgAgAi0BAAAAAS4BAAAAAQEIAAAiACACLQEAAAABLgEAAAABAQgAACQAMAEIAAAkADACLQEAPwAhLgEAPwAhAgAAABoAIAgAACcAIAItAQA_ACEuAQA_ACECAAAAHQAgCAAAKQAgAgAAAB0AIAgAACkAIAMAAAAaACAPAAAiACAQAAAnACABAAAAGgAgAQAAAB0AIAMVAAA8ACAWAAA-ACAXAAA9ACAFKgAAMwAwKwAAMAAQLAAAMwAwLQEANAAhLgEANAAhAwAAAB0AIAMAAC8AMBQAADAAIAMAAAAdACADAAAeADAEAAAaACAFKgAAMwAwKwAAMAAQLAAAMwAwLQEANAAhLgEANAAhDhUAADYAIBYAADcAIBcAADcAIC8BAAAAATABAAAABDEBAAAABDIBAAAAATMBAAAAATQBAAAAATUBAAAAATYBAAAAATcBAAAAATgBAAAAATkBADUAIQ4VAAA2ACAWAAA3ACAXAAA3ACAvAQAAAAEwAQAAAAQxAQAAAAQyAQAAAAEzAQAAAAE0AQAAAAE1AQAAAAE2AQAAAAE3AQAAAAE4AQAAAAE5AQA1ACEILwIAAAABMAIAAAAEMQIAAAAEMgIAAAABMwIAAAABNAIAAAABNQIAAAABOQIANgAhCy8BAAAAATABAAAABDEBAAAABDIBAAAAATMBAAAAATQBAAAAATUBAAAAATYBAAAAATcBAAAAATgBAAAAATkBADcAIQUqAAA4ADArAAAdABAsAAA4ADAtAQA5ACEuAQA5ACELLwEAAAABMAEAAAAEMQEAAAAEMgEAAAABMwEAAAABNAEAAAABNQEAAAABNgEAAAABNwEAAAABOAEAAAABOQEANwAhBioAADoAMCsAABcAECwAADoAMC4BADQAIToBADQAITsBADQAIQYqAAA7ADArAAAEABAsAAA7ADAuAQA5ACE6AQA5ACE7AQA5ACEAAAABPAEAAAABAAAAAAAAAAMVAAYWAAcXAAgAAAADFQAGFgAHFwAIAAAAAxUADhYADxcAEAAAAAMVAA4WAA8XABABAgECAwEFBgEGBwEHCAEJCgEKDAILDQMMDwENEQIOEgQREwESFAETFQIYGAUZGQkaGwobHAocHwodIAoeIQofIwogJQIhJgsiKAojKgIkKwwlLAomLQonLgIoMQ0pMhE"
+  strings: JSON.parse("[]"),
+  graph: "AAAA"
 }
 config.compilerWasm = {
       getRuntime: async () => require('./query_compiler_fast_bg.js'),

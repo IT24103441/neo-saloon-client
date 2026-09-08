@@ -120,31 +120,9 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.StudentScalarFieldEnum = {
-  email: 'email',
-  name: 'name',
-  city: 'city'
-};
-
-exports.Prisma.CourseScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
-};
-
-exports.Prisma.SortOrder = {
-  asc: 'asc',
-  desc: 'desc'
-};
-
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-};
-
 
 exports.Prisma.ModelName = {
-  Student: 'Student',
-  Course: 'Course'
+
 };
 
 /**

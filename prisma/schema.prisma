@@ -10,15 +10,5 @@ datasource db {
   provider = "postgresql"
 }
 
-model Student {
-  email String @id
-  name String
-  city String
 
-}
-
-model Course {
-  id     String @id
-  name   String
-}
   
