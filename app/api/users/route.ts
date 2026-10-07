@@ -43,6 +43,8 @@ export async function GET(request: NextRequest) {
     }
 
     const users = await prisma.user.findMany({
+        skip: (pageNumber - 1) * pageSize,
+        take: pageSize,
         select: {
             id: true,
             email: true,
@@ -61,7 +63,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
         {
             message: "Users fetched successfully",
-            users: users
+            users: users,
+            pagination: {
+                pageNumber: pageNumber,
+                pageSize: pageSize,
+                totalPages: totalPages,
+                totalCount: userCount
+            }
         }
     )
 }
@@ -174,6 +182,8 @@ export async function PUT(request: NextRequest) {
             }
         )
     }
+
+    const body = await request.json()
 
     if (requestedUser.id == id) {
         // user is trying to update their own account, allow it
