@@ -915,6 +915,7 @@ export namespace Prisma {
     status: string | null
     createdAt: Date | null
     lastLogin: Date | null
+    profileImage: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -928,6 +929,7 @@ export namespace Prisma {
     status: string | null
     createdAt: Date | null
     lastLogin: Date | null
+    profileImage: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -942,6 +944,7 @@ export namespace Prisma {
     createdAt: number
     lastLogin: number
     privileges: number
+    profileImage: number
     _all: number
   }
 
@@ -957,6 +960,7 @@ export namespace Prisma {
     status?: true
     createdAt?: true
     lastLogin?: true
+    profileImage?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -970,6 +974,7 @@ export namespace Prisma {
     status?: true
     createdAt?: true
     lastLogin?: true
+    profileImage?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -984,6 +989,7 @@ export namespace Prisma {
     createdAt?: true
     lastLogin?: true
     privileges?: true
+    profileImage?: true
     _all?: true
   }
 
@@ -1071,6 +1077,7 @@ export namespace Prisma {
     createdAt: Date
     lastLogin: Date | null
     privileges: string[]
+    profileImage: string
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1102,6 +1109,7 @@ export namespace Prisma {
     createdAt?: boolean
     lastLogin?: boolean
     privileges?: boolean
+    profileImage?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1116,6 +1124,7 @@ export namespace Prisma {
     createdAt?: boolean
     lastLogin?: boolean
     privileges?: boolean
+    profileImage?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1130,6 +1139,7 @@ export namespace Prisma {
     createdAt?: boolean
     lastLogin?: boolean
     privileges?: boolean
+    profileImage?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1144,9 +1154,10 @@ export namespace Prisma {
     createdAt?: boolean
     lastLogin?: boolean
     privileges?: boolean
+    profileImage?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "phone" | "firstName" | "lastName" | "password" | "role" | "status" | "createdAt" | "lastLogin" | "privileges", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "phone" | "firstName" | "lastName" | "password" | "role" | "status" | "createdAt" | "lastLogin" | "privileges" | "profileImage", ExtArgs["result"]["user"]>
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
@@ -1163,6 +1174,7 @@ export namespace Prisma {
       createdAt: Date
       lastLogin: Date | null
       privileges: string[]
+      profileImage: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1597,6 +1609,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly lastLogin: FieldRef<"User", 'DateTime'>
     readonly privileges: FieldRef<"User", 'String[]'>
+    readonly profileImage: FieldRef<"User", 'String'>
   }
     
 
@@ -1993,7 +2006,8 @@ export namespace Prisma {
     status: 'status',
     createdAt: 'createdAt',
     lastLogin: 'lastLogin',
-    privileges: 'privileges'
+    privileges: 'privileges',
+    profileImage: 'profileImage'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -2088,6 +2102,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     lastLogin?: DateTimeNullableFilter<"User"> | Date | string | null
     privileges?: StringNullableListFilter<"User">
+    profileImage?: StringFilter<"User"> | string
   }
 
   export type UserOrderByWithRelationInput = {
@@ -2102,6 +2117,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     lastLogin?: SortOrderInput | SortOrder
     privileges?: SortOrder
+    profileImage?: SortOrder
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -2119,6 +2135,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     lastLogin?: DateTimeNullableFilter<"User"> | Date | string | null
     privileges?: StringNullableListFilter<"User">
+    profileImage?: StringFilter<"User"> | string
   }, "id" | "email" | "phone">
 
   export type UserOrderByWithAggregationInput = {
@@ -2133,6 +2150,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     lastLogin?: SortOrderInput | SortOrder
     privileges?: SortOrder
+    profileImage?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -2153,6 +2171,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     lastLogin?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     privileges?: StringNullableListFilter<"User">
+    profileImage?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type UserCreateInput = {
@@ -2167,6 +2186,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastLogin?: Date | string | null
     privileges?: UserCreateprivilegesInput | string[]
+    profileImage?: string
   }
 
   export type UserUncheckedCreateInput = {
@@ -2181,6 +2201,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastLogin?: Date | string | null
     privileges?: UserCreateprivilegesInput | string[]
+    profileImage?: string
   }
 
   export type UserUpdateInput = {
@@ -2195,6 +2216,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     privileges?: UserUpdateprivilegesInput | string[]
+    profileImage?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateInput = {
@@ -2209,6 +2231,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     privileges?: UserUpdateprivilegesInput | string[]
+    profileImage?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateManyInput = {
@@ -2223,6 +2246,7 @@ export namespace Prisma {
     createdAt?: Date | string
     lastLogin?: Date | string | null
     privileges?: UserCreateprivilegesInput | string[]
+    profileImage?: string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -2237,6 +2261,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     privileges?: UserUpdateprivilegesInput | string[]
+    profileImage?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -2251,6 +2276,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     privileges?: UserUpdateprivilegesInput | string[]
+    profileImage?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2330,6 +2356,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     lastLogin?: SortOrder
     privileges?: SortOrder
+    profileImage?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -2343,6 +2370,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     lastLogin?: SortOrder
+    profileImage?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -2356,6 +2384,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     lastLogin?: SortOrder
+    profileImage?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
