@@ -228,7 +228,59 @@ export async function PUT(request: NextRequest) {
 
 
     } else {
-        // user is trying to update someone else's account, check if they have the privilege
+
+        const havePrivilege = await isPrivileged(request, "users:edit")
+
+
+        if (!havePrivilege) {
+            return NextResponse.json(
+                {
+                    message: "You do not have the privilege to edit other users"
+                },
+                {
+                    status: 403
+                }
+            )
+        }
+
+        const user = await prisma.user.findUnique({
+            where: {
+                id: id || "000"
+            }
+        })
+
+        if (user == null) {
+            return NextResponse.json(
+                {
+                    message: "User not found"
+                },
+                {
+                    status: 404
+                }
+            )
+        }
+
+        await prisma.user.update({
+            where: {
+                id: id || "000"
+            },
+            data: {
+                email: body.email || user.email,
+                firstName: body.firstName || user.firstName,
+                lastName: body.lastName || user.lastName,
+                phone: body.phone || user.phone,
+                profileImage: body.profileImage || user.profileImage,
+                role: body.role || user.role,
+                status: body.status || user.status,
+                privileges: body.privileges || user.privileges
+            }
+        })
+
+        return NextResponse.json(
+            {
+                message: "User updated successfully"
+            }
+        )
 
 
     }
