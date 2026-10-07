@@ -17,6 +17,31 @@ export async function GET(request: NextRequest) {
             }
         )
     }
+
+
+    const pageNumberInString = request.nextUrl.searchParams.get("pageNumber") || "1"
+
+    const pageSizeInString = request.nextUrl.searchParams.get("pageSize") || "10"
+
+    const pageNumber = parseInt(pageNumberInString)
+    const pageSize = parseInt(pageSizeInString) //50
+
+    const userCount = await prisma.user.count() //999 
+
+    const totalPages = Math.ceil(userCount / pageSize)
+
+    if (pageNumber > totalPages) {
+        return NextResponse.json(
+            {
+                message: "Page number exceeds total pages",
+                totalPages: totalPages
+            },
+            {
+                status: 400
+            }
+        )
+    }
+
     const users = await prisma.user.findMany({
         select: {
             id: true,
