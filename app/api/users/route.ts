@@ -1,11 +1,14 @@
 import prisma from "@/lib/prisma";
 import { getUser, isPrivileged } from "@/utils/authentication";
+import { UserRegistrationRequestSchema } from "@/types/dto/UserRegistrationRequest";
+import { UserSelfUpdateRequestSchema } from "@/types/dto/UserSelfUpdateRequest";
+import { UserUpdateByAdminRequestSchema } from "@/types/dto/UserUpdateByAdminRequest";
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
+import z from "zod";
 
 export async function GET(request: NextRequest) {
-
-    const havePrivilege = await isPrivileged(request, "users:read")
+    const havePrivilege = await isPrivileged(request, "users:read");
 
     if (!havePrivilege) {
         return NextResponse.json(
@@ -15,22 +18,30 @@ export async function GET(request: NextRequest) {
             {
                 status: 403
             }
-        )
+        );
     }
 
+    const pageNumberInString = request.nextUrl.searchParams.get("pageNumber") || "1";
+    const pageSizeInString = request.nextUrl.searchParams.get("pageSize") || "10";
 
-    const pageNumberInString = request.nextUrl.searchParams.get("pageNumber") || "1"
+    const pageNumber = parseInt(pageNumberInString);
+    const pageSize = parseInt(pageSizeInString);
 
-    const pageSizeInString = request.nextUrl.searchParams.get("pageSize") || "10"
+    if (isNaN(pageNumber) || pageNumber < 1 || isNaN(pageSize) || pageSize < 1) {
+        return NextResponse.json(
+            {
+                message: "Invalid pagination parameters"
+            },
+            {
+                status: 400
+            }
+        );
+    }
 
-    const pageNumber = parseInt(pageNumberInString)
-    const pageSize = parseInt(pageSizeInString) //50
+    const userCount = await prisma.user.count();
+    const totalPages = Math.ceil(userCount / pageSize);
 
-    const userCount = await prisma.user.count() //999 
-
-    const totalPages = Math.ceil(userCount / pageSize)
-
-    if (pageNumber > totalPages) {
+    if (totalPages > 0 && pageNumber > totalPages) {
         return NextResponse.json(
             {
                 message: "Page number exceeds total pages",
@@ -39,7 +50,7 @@ export async function GET(request: NextRequest) {
             {
                 status: 400
             }
-        )
+        );
     }
 
     const users = await prisma.user.findMany({
@@ -51,14 +62,14 @@ export async function GET(request: NextRequest) {
             phone: true,
             firstName: true,
             lastName: true,
-            password: false,
             role: true,
             status: true,
             createdAt: true,
             lastLogin: true,
-            privileges: true
+            privileges: true,
+            profileImage: true
         }
-    })
+    });
 
     return NextResponse.json(
         {
@@ -71,106 +82,76 @@ export async function GET(request: NextRequest) {
                 totalCount: userCount
             }
         }
-    )
+    );
 }
 
 export async function POST(request: NextRequest) {
+    try {
+        const body = await request.json();
+        const parsedBody = UserRegistrationRequestSchema.parse(body);
 
-    //email , firstName, lastName, password, phone(optional)
-
-    const body = await request.json()
-
-    if (body.email == null) {
-        return NextResponse.json(
-            {
-                message: "Email is required"
-            },
-            {
-                status: 422
-            }
-        )
-    }
-
-    if (body.firstName == null) {
-        return NextResponse.json(
-            {
-                message: "First name is required"
-            },
-            {
-                status: 422
-            }
-        )
-    }
-
-    if (body.lastName == null) {
-        return NextResponse.json(
-            {
-                message: "Last name is required"
-            },
-            {
-                status: 422
-            }
-        )
-    }
-
-    if (body.password == null) {
-        return NextResponse.json(
-            {
-                message: "Password is required"
-            },
-            {
-                status: 422
-            }
-        )
-    }
-
-    const existingUser = await prisma.user.findUnique(
-        {
+        const existingUser = await prisma.user.findUnique({
             where: {
-                email: body.email
+                email: parsedBody.email
             }
-        }
-    )
+        });
 
-    if (existingUser != null) {
+        if (existingUser != null) {
+            return NextResponse.json(
+                {
+                    message: "User with this email already exists"
+                },
+                {
+                    status: 409
+                }
+            );
+        }
+
+        const passwordHash = await bcrypt.hash(parsedBody.password, 12);
+
+        await prisma.user.create({
+            data: {
+                email: parsedBody.email,
+                firstName: parsedBody.firstName,
+                lastName: parsedBody.lastName,
+                password: passwordHash,
+                phone: parsedBody.phone
+            }
+        });
+
         return NextResponse.json(
             {
-                message: "User with this email already exists"
+                message: "User created successfully"
             },
             {
-                status: 409
+                status: 201
             }
-        )
+        );
+    } catch (error) {
+        if (error instanceof z.ZodError) {
+            return NextResponse.json(
+                {
+                    message: error.issues[0]?.message ?? "Invalid input"
+                },
+                {
+                    status: 400
+                }
+            );
+        }
+
+        return NextResponse.json(
+            {
+                message: "Server error"
+            },
+            {
+                status: 500
+            }
+        );
     }
-
-    const passwordHash = await bcrypt.hash(body.password, 12)
-
-    await prisma.user.create({
-        data: {
-            email: body.email,
-            firstName: body.firstName,
-            lastName: body.lastName,
-            password: passwordHash,
-            phone: body.phone,
-        }
-    })
-
-    return NextResponse.json(
-        {
-            message: "User created successfully"
-        },
-        {
-            status: 201
-        }
-    )
-
 }
 
 export async function PUT(request: NextRequest) {
-
-    const id = request.nextUrl.searchParams.get("id")
-
-    const requestedUser = await getUser(request)
+    const requestedUser = await getUser(request);
 
     if (requestedUser == null) {
         return NextResponse.json(
@@ -180,109 +161,130 @@ export async function PUT(request: NextRequest) {
             {
                 status: 401
             }
-        )
+        );
     }
 
-    const body = await request.json()
+    const id = request.nextUrl.searchParams.get("id");
 
-    if (requestedUser.id == id) {
-        //never allow users to update their own role, status, privileges
+    try {
+        const body = await request.json();
 
-        const user = await prisma.user.findUnique({
-            where: {
-                id: id
+        if (!id || requestedUser.id === id) {
+            // Self-update
+            UserSelfUpdateRequestSchema.parse(body);
+
+            const targetId = requestedUser.id;
+
+            const user = await prisma.user.findUnique({
+                where: {
+                    id: targetId
+                }
+            });
+
+            if (user == null) {
+                return NextResponse.json(
+                    {
+                        message: "User not found"
+                    },
+                    {
+                        status: 404
+                    }
+                );
             }
-        })
 
-        if (user == null) {
+            await prisma.user.update({
+                where: {
+                    id: targetId
+                },
+                data: {
+                    email: body.email || user.email,
+                    firstName: body.firstName || user.firstName,
+                    lastName: body.lastName || user.lastName,
+                    phone: body.phone || user.phone,
+                    profileImage: body.profileImage || user.profileImage
+                }
+            });
+
             return NextResponse.json(
                 {
-                    message: "User not found"
-                },
-                {
-                    status: 404
+                    message: "User updated successfully"
                 }
-            )
-        }
+            );
+        } else {
+            // Admin updating another user
+            const havePrivilege = await isPrivileged(request, "users:edit");
 
-        await prisma.user.update({
-
-            where: {
-                id: id
-            },
-            data: {
-                email: body.email || user.email,
-                firstName: body.firstName || user.firstName,
-                lastName: body.lastName || user.lastName,
-                phone: body.phone || user.phone,
-                profileImage: body.profileImage || user.profileImage // should be included in the token
+            if (!havePrivilege) {
+                return NextResponse.json(
+                    {
+                        message: "You do not have the privilege to edit other users"
+                    },
+                    {
+                        status: 403
+                    }
+                );
             }
 
-        })
+            UserUpdateByAdminRequestSchema.parse(body);
+
+            const user = await prisma.user.findUnique({
+                where: {
+                    id: id
+                }
+            });
+
+            if (user == null) {
+                return NextResponse.json(
+                    {
+                        message: "User not found"
+                    },
+                    {
+                        status: 404
+                    }
+                );
+            }
+
+            await prisma.user.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    email: body.email || user.email,
+                    firstName: body.firstName || user.firstName,
+                    lastName: body.lastName || user.lastName,
+                    phone: body.phone || user.phone,
+                    profileImage: body.profileImage || user.profileImage,
+                    role: body.role || user.role,
+                    status: body.status || user.status,
+                    privileges: body.privileges || user.privileges
+                }
+            });
+
+            return NextResponse.json(
+                {
+                    message: "User updated successfully"
+                }
+            );
+        }
+    } catch (error) {
+        if (error instanceof z.ZodError) {
+            return NextResponse.json(
+                {
+                    message: error.issues[0]?.message ?? "Invalid input"
+                },
+                {
+                    status: 400
+                }
+            );
+        }
 
         return NextResponse.json(
             {
-                message: "User updated successfully"
-            }
-        )
-
-
-    } else {
-
-        const havePrivilege = await isPrivileged(request, "users:edit")
-
-
-        if (!havePrivilege) {
-            return NextResponse.json(
-                {
-                    message: "You do not have the privilege to edit other users"
-                },
-                {
-                    status: 403
-                }
-            )
-        }
-
-        const user = await prisma.user.findUnique({
-            where: {
-                id: id || "000"
-            }
-        })
-
-        if (user == null) {
-            return NextResponse.json(
-                {
-                    message: "User not found"
-                },
-                {
-                    status: 404
-                }
-            )
-        }
-
-        await prisma.user.update({
-            where: {
-                id: id || "000"
+                message: "Server error"
             },
-            data: {
-                email: body.email || user.email,
-                firstName: body.firstName || user.firstName,
-                lastName: body.lastName || user.lastName,
-                phone: body.phone || user.phone,
-                profileImage: body.profileImage || user.profileImage,
-                role: body.role || user.role,
-                status: body.status || user.status,
-                privileges: body.privileges || user.privileges
-            }
-        })
-
-        return NextResponse.json(
             {
-                message: "User updated successfully"
+                status: 500
             }
-        )
-
-
+        );
     }
-
-}
+}
