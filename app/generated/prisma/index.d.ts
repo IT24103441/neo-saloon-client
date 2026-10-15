@@ -18,6 +18,46 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model Product
+ * 
+ */
+export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
+/**
+ * Model Media
+ * 
+ */
+export type Media = $Result.DefaultSelection<Prisma.$MediaPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const ProductStatus: {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  DELETED: 'DELETED'
+};
+
+export type ProductStatus = (typeof ProductStatus)[keyof typeof ProductStatus]
+
+
+export const MediaType: {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
+};
+
+export type MediaType = (typeof MediaType)[keyof typeof MediaType]
+
+}
+
+export type ProductStatus = $Enums.ProductStatus
+
+export const ProductStatus: typeof $Enums.ProductStatus
+
+export type MediaType = $Enums.MediaType
+
+export const MediaType: typeof $Enums.MediaType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -149,6 +189,26 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.product`: Exposes CRUD operations for the **Product** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Products
+    * const products = await prisma.product.findMany()
+    * ```
+    */
+  get product(): Prisma.ProductDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.media`: Exposes CRUD operations for the **Media** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Media
+    * const media = await prisma.media.findMany()
+    * ```
+    */
+  get media(): Prisma.MediaDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -596,7 +656,9 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User'
+    User: 'User',
+    Product: 'Product',
+    Media: 'Media'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,7 +674,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user"
+      modelProps: "user" | "product" | "media"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -687,6 +749,154 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Product: {
+        payload: Prisma.$ProductPayload<ExtArgs>
+        fields: Prisma.ProductFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProductFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProductFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
+          }
+          findFirst: {
+            args: Prisma.ProductFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProductFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
+          }
+          findMany: {
+            args: Prisma.ProductFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>[]
+          }
+          create: {
+            args: Prisma.ProductCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
+          }
+          createMany: {
+            args: Prisma.ProductCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProductCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>[]
+          }
+          delete: {
+            args: Prisma.ProductDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
+          }
+          update: {
+            args: Prisma.ProductUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProductDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProductUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProductUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProductUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
+          }
+          aggregate: {
+            args: Prisma.ProductAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProduct>
+          }
+          groupBy: {
+            args: Prisma.ProductGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProductCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductCountAggregateOutputType> | number
+          }
+        }
+      }
+      Media: {
+        payload: Prisma.$MediaPayload<ExtArgs>
+        fields: Prisma.MediaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MediaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MediaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>
+          }
+          findFirst: {
+            args: Prisma.MediaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MediaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>
+          }
+          findMany: {
+            args: Prisma.MediaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>[]
+          }
+          create: {
+            args: Prisma.MediaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>
+          }
+          createMany: {
+            args: Prisma.MediaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MediaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>[]
+          }
+          delete: {
+            args: Prisma.MediaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>
+          }
+          update: {
+            args: Prisma.MediaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>
+          }
+          deleteMany: {
+            args: Prisma.MediaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MediaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MediaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>[]
+          }
+          upsert: {
+            args: Prisma.MediaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>
+          }
+          aggregate: {
+            args: Prisma.MediaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMedia>
+          }
+          groupBy: {
+            args: Prisma.MediaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MediaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MediaCountArgs<ExtArgs>
+            result: $Utils.Optional<MediaCountAggregateOutputType> | number
           }
         }
       }
@@ -814,6 +1024,8 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    product?: ProductOmit
+    media?: MediaOmit
   }
 
   /* Types for Logging */
@@ -888,6 +1100,36 @@ export namespace Prisma {
    * Count Types
    */
 
+
+  /**
+   * Count Type ProductCountOutputType
+   */
+
+  export type ProductCountOutputType = {
+    media: number
+  }
+
+  export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    media?: boolean | ProductCountOutputTypeCountMediaArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductCountOutputType
+     */
+    select?: ProductCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeCountMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MediaWhereInput
+  }
 
 
   /**
@@ -1982,6 +2224,2247 @@ export namespace Prisma {
 
 
   /**
+   * Model Product
+   */
+
+  export type AggregateProduct = {
+    _count: ProductCountAggregateOutputType | null
+    _avg: ProductAvgAggregateOutputType | null
+    _sum: ProductSumAggregateOutputType | null
+    _min: ProductMinAggregateOutputType | null
+    _max: ProductMaxAggregateOutputType | null
+  }
+
+  export type ProductAvgAggregateOutputType = {
+    stock: number | null
+    price: number | null
+    compareAt: number | null
+  }
+
+  export type ProductSumAggregateOutputType = {
+    stock: number | null
+    price: number | null
+    compareAt: number | null
+  }
+
+  export type ProductMinAggregateOutputType = {
+    id: string | null
+    sku: string | null
+    name: string | null
+    description: string | null
+    stock: number | null
+    status: $Enums.ProductStatus | null
+    price: number | null
+    compareAt: number | null
+    brand: string | null
+    model: string | null
+  }
+
+  export type ProductMaxAggregateOutputType = {
+    id: string | null
+    sku: string | null
+    name: string | null
+    description: string | null
+    stock: number | null
+    status: $Enums.ProductStatus | null
+    price: number | null
+    compareAt: number | null
+    brand: string | null
+    model: string | null
+  }
+
+  export type ProductCountAggregateOutputType = {
+    id: number
+    sku: number
+    name: number
+    altNames: number
+    description: number
+    stock: number
+    status: number
+    price: number
+    compareAt: number
+    brand: number
+    model: number
+    _all: number
+  }
+
+
+  export type ProductAvgAggregateInputType = {
+    stock?: true
+    price?: true
+    compareAt?: true
+  }
+
+  export type ProductSumAggregateInputType = {
+    stock?: true
+    price?: true
+    compareAt?: true
+  }
+
+  export type ProductMinAggregateInputType = {
+    id?: true
+    sku?: true
+    name?: true
+    description?: true
+    stock?: true
+    status?: true
+    price?: true
+    compareAt?: true
+    brand?: true
+    model?: true
+  }
+
+  export type ProductMaxAggregateInputType = {
+    id?: true
+    sku?: true
+    name?: true
+    description?: true
+    stock?: true
+    status?: true
+    price?: true
+    compareAt?: true
+    brand?: true
+    model?: true
+  }
+
+  export type ProductCountAggregateInputType = {
+    id?: true
+    sku?: true
+    name?: true
+    altNames?: true
+    description?: true
+    stock?: true
+    status?: true
+    price?: true
+    compareAt?: true
+    brand?: true
+    model?: true
+    _all?: true
+  }
+
+  export type ProductAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Product to aggregate.
+     */
+    where?: ProductWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Products to fetch.
+     */
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProductWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Products from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Products.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Products
+    **/
+    _count?: true | ProductCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProductAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProductSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductMaxAggregateInputType
+  }
+
+  export type GetProductAggregateType<T extends ProductAggregateArgs> = {
+        [P in keyof T & keyof AggregateProduct]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProduct[P]>
+      : GetScalarType<T[P], AggregateProduct[P]>
+  }
+
+
+
+
+  export type ProductGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductWhereInput
+    orderBy?: ProductOrderByWithAggregationInput | ProductOrderByWithAggregationInput[]
+    by: ProductScalarFieldEnum[] | ProductScalarFieldEnum
+    having?: ProductScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductCountAggregateInputType | true
+    _avg?: ProductAvgAggregateInputType
+    _sum?: ProductSumAggregateInputType
+    _min?: ProductMinAggregateInputType
+    _max?: ProductMaxAggregateInputType
+  }
+
+  export type ProductGroupByOutputType = {
+    id: string
+    sku: string
+    name: string
+    altNames: string[]
+    description: string
+    stock: number
+    status: $Enums.ProductStatus
+    price: number
+    compareAt: number | null
+    brand: string | null
+    model: string | null
+    _count: ProductCountAggregateOutputType | null
+    _avg: ProductAvgAggregateOutputType | null
+    _sum: ProductSumAggregateOutputType | null
+    _min: ProductMinAggregateOutputType | null
+    _max: ProductMaxAggregateOutputType | null
+  }
+
+  type GetProductGroupByPayload<T extends ProductGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProductSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sku?: boolean
+    name?: boolean
+    altNames?: boolean
+    description?: boolean
+    stock?: boolean
+    status?: boolean
+    price?: boolean
+    compareAt?: boolean
+    brand?: boolean
+    model?: boolean
+    media?: boolean | Product$mediaArgs<ExtArgs>
+    _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["product"]>
+
+  export type ProductSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sku?: boolean
+    name?: boolean
+    altNames?: boolean
+    description?: boolean
+    stock?: boolean
+    status?: boolean
+    price?: boolean
+    compareAt?: boolean
+    brand?: boolean
+    model?: boolean
+  }, ExtArgs["result"]["product"]>
+
+  export type ProductSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sku?: boolean
+    name?: boolean
+    altNames?: boolean
+    description?: boolean
+    stock?: boolean
+    status?: boolean
+    price?: boolean
+    compareAt?: boolean
+    brand?: boolean
+    model?: boolean
+  }, ExtArgs["result"]["product"]>
+
+  export type ProductSelectScalar = {
+    id?: boolean
+    sku?: boolean
+    name?: boolean
+    altNames?: boolean
+    description?: boolean
+    stock?: boolean
+    status?: boolean
+    price?: boolean
+    compareAt?: boolean
+    brand?: boolean
+    model?: boolean
+  }
+
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sku" | "name" | "altNames" | "description" | "stock" | "status" | "price" | "compareAt" | "brand" | "model", ExtArgs["result"]["product"]>
+  export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    media?: boolean | Product$mediaArgs<ExtArgs>
+    _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ProductIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Product"
+    objects: {
+      media: Prisma.$MediaPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      sku: string
+      name: string
+      altNames: string[]
+      description: string
+      stock: number
+      status: $Enums.ProductStatus
+      price: number
+      compareAt: number | null
+      brand: string | null
+      model: string | null
+    }, ExtArgs["result"]["product"]>
+    composites: {}
+  }
+
+  type ProductGetPayload<S extends boolean | null | undefined | ProductDefaultArgs> = $Result.GetResult<Prisma.$ProductPayload, S>
+
+  type ProductCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProductFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductCountAggregateInputType | true
+    }
+
+  export interface ProductDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Product'], meta: { name: 'Product' } }
+    /**
+     * Find zero or one Product that matches the filter.
+     * @param {ProductFindUniqueArgs} args - Arguments to find a Product
+     * @example
+     * // Get one Product
+     * const product = await prisma.product.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProductFindUniqueArgs>(args: SelectSubset<T, ProductFindUniqueArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Product that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProductFindUniqueOrThrowArgs} args - Arguments to find a Product
+     * @example
+     * // Get one Product
+     * const product = await prisma.product.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProductFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Product that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductFindFirstArgs} args - Arguments to find a Product
+     * @example
+     * // Get one Product
+     * const product = await prisma.product.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProductFindFirstArgs>(args?: SelectSubset<T, ProductFindFirstArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Product that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductFindFirstOrThrowArgs} args - Arguments to find a Product
+     * @example
+     * // Get one Product
+     * const product = await prisma.product.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProductFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Products that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Products
+     * const products = await prisma.product.findMany()
+     * 
+     * // Get first 10 Products
+     * const products = await prisma.product.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productWithIdOnly = await prisma.product.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProductFindManyArgs>(args?: SelectSubset<T, ProductFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Product.
+     * @param {ProductCreateArgs} args - Arguments to create a Product.
+     * @example
+     * // Create one Product
+     * const Product = await prisma.product.create({
+     *   data: {
+     *     // ... data to create a Product
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProductCreateArgs>(args: SelectSubset<T, ProductCreateArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Products.
+     * @param {ProductCreateManyArgs} args - Arguments to create many Products.
+     * @example
+     * // Create many Products
+     * const product = await prisma.product.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProductCreateManyArgs>(args?: SelectSubset<T, ProductCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Products and returns the data saved in the database.
+     * @param {ProductCreateManyAndReturnArgs} args - Arguments to create many Products.
+     * @example
+     * // Create many Products
+     * const product = await prisma.product.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Products and only return the `id`
+     * const productWithIdOnly = await prisma.product.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProductCreateManyAndReturnArgs>(args?: SelectSubset<T, ProductCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Product.
+     * @param {ProductDeleteArgs} args - Arguments to delete one Product.
+     * @example
+     * // Delete one Product
+     * const Product = await prisma.product.delete({
+     *   where: {
+     *     // ... filter to delete one Product
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProductDeleteArgs>(args: SelectSubset<T, ProductDeleteArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Product.
+     * @param {ProductUpdateArgs} args - Arguments to update one Product.
+     * @example
+     * // Update one Product
+     * const product = await prisma.product.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProductUpdateArgs>(args: SelectSubset<T, ProductUpdateArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Products.
+     * @param {ProductDeleteManyArgs} args - Arguments to filter Products to delete.
+     * @example
+     * // Delete a few Products
+     * const { count } = await prisma.product.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProductDeleteManyArgs>(args?: SelectSubset<T, ProductDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Products.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Products
+     * const product = await prisma.product.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProductUpdateManyArgs>(args: SelectSubset<T, ProductUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Products and returns the data updated in the database.
+     * @param {ProductUpdateManyAndReturnArgs} args - Arguments to update many Products.
+     * @example
+     * // Update many Products
+     * const product = await prisma.product.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Products and only return the `id`
+     * const productWithIdOnly = await prisma.product.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProductUpdateManyAndReturnArgs>(args: SelectSubset<T, ProductUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Product.
+     * @param {ProductUpsertArgs} args - Arguments to update or create a Product.
+     * @example
+     * // Update or create a Product
+     * const product = await prisma.product.upsert({
+     *   create: {
+     *     // ... data to create a Product
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Product we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProductUpsertArgs>(args: SelectSubset<T, ProductUpsertArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Products.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductCountArgs} args - Arguments to filter Products to count.
+     * @example
+     * // Count the number of Products
+     * const count = await prisma.product.count({
+     *   where: {
+     *     // ... the filter for the Products we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProductCountArgs>(
+      args?: Subset<T, ProductCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Product.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductAggregateArgs>(args: Subset<T, ProductAggregateArgs>): Prisma.PrismaPromise<GetProductAggregateType<T>>
+
+    /**
+     * Group by Product.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProductGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProductGroupByArgs['orderBy'] }
+        : { orderBy?: ProductGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProductGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Product model
+   */
+  readonly fields: ProductFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Product.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProductClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    media<T extends Product$mediaArgs<ExtArgs> = {}>(args?: Subset<T, Product$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Product model
+   */
+  interface ProductFieldRefs {
+    readonly id: FieldRef<"Product", 'String'>
+    readonly sku: FieldRef<"Product", 'String'>
+    readonly name: FieldRef<"Product", 'String'>
+    readonly altNames: FieldRef<"Product", 'String[]'>
+    readonly description: FieldRef<"Product", 'String'>
+    readonly stock: FieldRef<"Product", 'Int'>
+    readonly status: FieldRef<"Product", 'ProductStatus'>
+    readonly price: FieldRef<"Product", 'Float'>
+    readonly compareAt: FieldRef<"Product", 'Float'>
+    readonly brand: FieldRef<"Product", 'String'>
+    readonly model: FieldRef<"Product", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Product findUnique
+   */
+  export type ProductFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * Filter, which Product to fetch.
+     */
+    where: ProductWhereUniqueInput
+  }
+
+  /**
+   * Product findUniqueOrThrow
+   */
+  export type ProductFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * Filter, which Product to fetch.
+     */
+    where: ProductWhereUniqueInput
+  }
+
+  /**
+   * Product findFirst
+   */
+  export type ProductFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * Filter, which Product to fetch.
+     */
+    where?: ProductWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Products to fetch.
+     */
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Products.
+     */
+    cursor?: ProductWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Products from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Products.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Products.
+     */
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
+   * Product findFirstOrThrow
+   */
+  export type ProductFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * Filter, which Product to fetch.
+     */
+    where?: ProductWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Products to fetch.
+     */
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Products.
+     */
+    cursor?: ProductWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Products from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Products.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Products.
+     */
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
+   * Product findMany
+   */
+  export type ProductFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * Filter, which Products to fetch.
+     */
+    where?: ProductWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Products to fetch.
+     */
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Products.
+     */
+    cursor?: ProductWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Products from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Products.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Products.
+     */
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
+   * Product create
+   */
+  export type ProductCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Product.
+     */
+    data: XOR<ProductCreateInput, ProductUncheckedCreateInput>
+  }
+
+  /**
+   * Product createMany
+   */
+  export type ProductCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Products.
+     */
+    data: ProductCreateManyInput | ProductCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Product createManyAndReturn
+   */
+  export type ProductCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * The data used to create many Products.
+     */
+    data: ProductCreateManyInput | ProductCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Product update
+   */
+  export type ProductUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Product.
+     */
+    data: XOR<ProductUpdateInput, ProductUncheckedUpdateInput>
+    /**
+     * Choose, which Product to update.
+     */
+    where: ProductWhereUniqueInput
+  }
+
+  /**
+   * Product updateMany
+   */
+  export type ProductUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Products.
+     */
+    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyInput>
+    /**
+     * Filter which Products to update
+     */
+    where?: ProductWhereInput
+    /**
+     * Limit how many Products to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Product updateManyAndReturn
+   */
+  export type ProductUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * The data used to update Products.
+     */
+    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyInput>
+    /**
+     * Filter which Products to update
+     */
+    where?: ProductWhereInput
+    /**
+     * Limit how many Products to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Product upsert
+   */
+  export type ProductUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Product to update in case it exists.
+     */
+    where: ProductWhereUniqueInput
+    /**
+     * In case the Product found by the `where` argument doesn't exist, create a new Product with this data.
+     */
+    create: XOR<ProductCreateInput, ProductUncheckedCreateInput>
+    /**
+     * In case the Product was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProductUpdateInput, ProductUncheckedUpdateInput>
+  }
+
+  /**
+   * Product delete
+   */
+  export type ProductDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * Filter which Product to delete.
+     */
+    where: ProductWhereUniqueInput
+  }
+
+  /**
+   * Product deleteMany
+   */
+  export type ProductDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Products to delete
+     */
+    where?: ProductWhereInput
+    /**
+     * Limit how many Products to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Product.media
+   */
+  export type Product$mediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    where?: MediaWhereInput
+    orderBy?: MediaOrderByWithRelationInput | MediaOrderByWithRelationInput[]
+    cursor?: MediaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MediaScalarFieldEnum | MediaScalarFieldEnum[]
+  }
+
+  /**
+   * Product without action
+   */
+  export type ProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Media
+   */
+
+  export type AggregateMedia = {
+    _count: MediaCountAggregateOutputType | null
+    _min: MediaMinAggregateOutputType | null
+    _max: MediaMaxAggregateOutputType | null
+  }
+
+  export type MediaMinAggregateOutputType = {
+    id: string | null
+    url: string | null
+    type: $Enums.MediaType | null
+    productId: string | null
+  }
+
+  export type MediaMaxAggregateOutputType = {
+    id: string | null
+    url: string | null
+    type: $Enums.MediaType | null
+    productId: string | null
+  }
+
+  export type MediaCountAggregateOutputType = {
+    id: number
+    url: number
+    type: number
+    productId: number
+    _all: number
+  }
+
+
+  export type MediaMinAggregateInputType = {
+    id?: true
+    url?: true
+    type?: true
+    productId?: true
+  }
+
+  export type MediaMaxAggregateInputType = {
+    id?: true
+    url?: true
+    type?: true
+    productId?: true
+  }
+
+  export type MediaCountAggregateInputType = {
+    id?: true
+    url?: true
+    type?: true
+    productId?: true
+    _all?: true
+  }
+
+  export type MediaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Media to aggregate.
+     */
+    where?: MediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Media to fetch.
+     */
+    orderBy?: MediaOrderByWithRelationInput | MediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Media from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Media.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Media
+    **/
+    _count?: true | MediaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MediaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MediaMaxAggregateInputType
+  }
+
+  export type GetMediaAggregateType<T extends MediaAggregateArgs> = {
+        [P in keyof T & keyof AggregateMedia]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMedia[P]>
+      : GetScalarType<T[P], AggregateMedia[P]>
+  }
+
+
+
+
+  export type MediaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MediaWhereInput
+    orderBy?: MediaOrderByWithAggregationInput | MediaOrderByWithAggregationInput[]
+    by: MediaScalarFieldEnum[] | MediaScalarFieldEnum
+    having?: MediaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MediaCountAggregateInputType | true
+    _min?: MediaMinAggregateInputType
+    _max?: MediaMaxAggregateInputType
+  }
+
+  export type MediaGroupByOutputType = {
+    id: string
+    url: string
+    type: $Enums.MediaType
+    productId: string
+    _count: MediaCountAggregateOutputType | null
+    _min: MediaMinAggregateOutputType | null
+    _max: MediaMaxAggregateOutputType | null
+  }
+
+  type GetMediaGroupByPayload<T extends MediaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MediaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MediaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MediaGroupByOutputType[P]>
+            : GetScalarType<T[P], MediaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MediaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    url?: boolean
+    type?: boolean
+    productId?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["media"]>
+
+  export type MediaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    url?: boolean
+    type?: boolean
+    productId?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["media"]>
+
+  export type MediaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    url?: boolean
+    type?: boolean
+    productId?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["media"]>
+
+  export type MediaSelectScalar = {
+    id?: boolean
+    url?: boolean
+    type?: boolean
+    productId?: boolean
+  }
+
+  export type MediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "type" | "productId", ExtArgs["result"]["media"]>
+  export type MediaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }
+  export type MediaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }
+  export type MediaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }
+
+  export type $MediaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Media"
+    objects: {
+      product: Prisma.$ProductPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      url: string
+      type: $Enums.MediaType
+      productId: string
+    }, ExtArgs["result"]["media"]>
+    composites: {}
+  }
+
+  type MediaGetPayload<S extends boolean | null | undefined | MediaDefaultArgs> = $Result.GetResult<Prisma.$MediaPayload, S>
+
+  type MediaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MediaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MediaCountAggregateInputType | true
+    }
+
+  export interface MediaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Media'], meta: { name: 'Media' } }
+    /**
+     * Find zero or one Media that matches the filter.
+     * @param {MediaFindUniqueArgs} args - Arguments to find a Media
+     * @example
+     * // Get one Media
+     * const media = await prisma.media.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MediaFindUniqueArgs>(args: SelectSubset<T, MediaFindUniqueArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Media that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MediaFindUniqueOrThrowArgs} args - Arguments to find a Media
+     * @example
+     * // Get one Media
+     * const media = await prisma.media.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MediaFindUniqueOrThrowArgs>(args: SelectSubset<T, MediaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Media that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFindFirstArgs} args - Arguments to find a Media
+     * @example
+     * // Get one Media
+     * const media = await prisma.media.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MediaFindFirstArgs>(args?: SelectSubset<T, MediaFindFirstArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Media that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFindFirstOrThrowArgs} args - Arguments to find a Media
+     * @example
+     * // Get one Media
+     * const media = await prisma.media.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MediaFindFirstOrThrowArgs>(args?: SelectSubset<T, MediaFindFirstOrThrowArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Media that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Media
+     * const media = await prisma.media.findMany()
+     * 
+     * // Get first 10 Media
+     * const media = await prisma.media.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mediaWithIdOnly = await prisma.media.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MediaFindManyArgs>(args?: SelectSubset<T, MediaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Media.
+     * @param {MediaCreateArgs} args - Arguments to create a Media.
+     * @example
+     * // Create one Media
+     * const Media = await prisma.media.create({
+     *   data: {
+     *     // ... data to create a Media
+     *   }
+     * })
+     * 
+     */
+    create<T extends MediaCreateArgs>(args: SelectSubset<T, MediaCreateArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Media.
+     * @param {MediaCreateManyArgs} args - Arguments to create many Media.
+     * @example
+     * // Create many Media
+     * const media = await prisma.media.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MediaCreateManyArgs>(args?: SelectSubset<T, MediaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Media and returns the data saved in the database.
+     * @param {MediaCreateManyAndReturnArgs} args - Arguments to create many Media.
+     * @example
+     * // Create many Media
+     * const media = await prisma.media.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Media and only return the `id`
+     * const mediaWithIdOnly = await prisma.media.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MediaCreateManyAndReturnArgs>(args?: SelectSubset<T, MediaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Media.
+     * @param {MediaDeleteArgs} args - Arguments to delete one Media.
+     * @example
+     * // Delete one Media
+     * const Media = await prisma.media.delete({
+     *   where: {
+     *     // ... filter to delete one Media
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MediaDeleteArgs>(args: SelectSubset<T, MediaDeleteArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Media.
+     * @param {MediaUpdateArgs} args - Arguments to update one Media.
+     * @example
+     * // Update one Media
+     * const media = await prisma.media.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MediaUpdateArgs>(args: SelectSubset<T, MediaUpdateArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Media.
+     * @param {MediaDeleteManyArgs} args - Arguments to filter Media to delete.
+     * @example
+     * // Delete a few Media
+     * const { count } = await prisma.media.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MediaDeleteManyArgs>(args?: SelectSubset<T, MediaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Media.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Media
+     * const media = await prisma.media.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MediaUpdateManyArgs>(args: SelectSubset<T, MediaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Media and returns the data updated in the database.
+     * @param {MediaUpdateManyAndReturnArgs} args - Arguments to update many Media.
+     * @example
+     * // Update many Media
+     * const media = await prisma.media.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Media and only return the `id`
+     * const mediaWithIdOnly = await prisma.media.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MediaUpdateManyAndReturnArgs>(args: SelectSubset<T, MediaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Media.
+     * @param {MediaUpsertArgs} args - Arguments to update or create a Media.
+     * @example
+     * // Update or create a Media
+     * const media = await prisma.media.upsert({
+     *   create: {
+     *     // ... data to create a Media
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Media we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MediaUpsertArgs>(args: SelectSubset<T, MediaUpsertArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Media.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaCountArgs} args - Arguments to filter Media to count.
+     * @example
+     * // Count the number of Media
+     * const count = await prisma.media.count({
+     *   where: {
+     *     // ... the filter for the Media we want to count
+     *   }
+     * })
+    **/
+    count<T extends MediaCountArgs>(
+      args?: Subset<T, MediaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MediaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Media.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MediaAggregateArgs>(args: Subset<T, MediaAggregateArgs>): Prisma.PrismaPromise<GetMediaAggregateType<T>>
+
+    /**
+     * Group by Media.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MediaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MediaGroupByArgs['orderBy'] }
+        : { orderBy?: MediaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MediaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMediaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Media model
+   */
+  readonly fields: MediaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Media.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MediaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Media model
+   */
+  interface MediaFieldRefs {
+    readonly id: FieldRef<"Media", 'String'>
+    readonly url: FieldRef<"Media", 'String'>
+    readonly type: FieldRef<"Media", 'MediaType'>
+    readonly productId: FieldRef<"Media", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Media findUnique
+   */
+  export type MediaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * Filter, which Media to fetch.
+     */
+    where: MediaWhereUniqueInput
+  }
+
+  /**
+   * Media findUniqueOrThrow
+   */
+  export type MediaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * Filter, which Media to fetch.
+     */
+    where: MediaWhereUniqueInput
+  }
+
+  /**
+   * Media findFirst
+   */
+  export type MediaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * Filter, which Media to fetch.
+     */
+    where?: MediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Media to fetch.
+     */
+    orderBy?: MediaOrderByWithRelationInput | MediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Media.
+     */
+    cursor?: MediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Media from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Media.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Media.
+     */
+    distinct?: MediaScalarFieldEnum | MediaScalarFieldEnum[]
+  }
+
+  /**
+   * Media findFirstOrThrow
+   */
+  export type MediaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * Filter, which Media to fetch.
+     */
+    where?: MediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Media to fetch.
+     */
+    orderBy?: MediaOrderByWithRelationInput | MediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Media.
+     */
+    cursor?: MediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Media from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Media.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Media.
+     */
+    distinct?: MediaScalarFieldEnum | MediaScalarFieldEnum[]
+  }
+
+  /**
+   * Media findMany
+   */
+  export type MediaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * Filter, which Media to fetch.
+     */
+    where?: MediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Media to fetch.
+     */
+    orderBy?: MediaOrderByWithRelationInput | MediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Media.
+     */
+    cursor?: MediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Media from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Media.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Media.
+     */
+    distinct?: MediaScalarFieldEnum | MediaScalarFieldEnum[]
+  }
+
+  /**
+   * Media create
+   */
+  export type MediaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Media.
+     */
+    data: XOR<MediaCreateInput, MediaUncheckedCreateInput>
+  }
+
+  /**
+   * Media createMany
+   */
+  export type MediaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Media.
+     */
+    data: MediaCreateManyInput | MediaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Media createManyAndReturn
+   */
+  export type MediaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * The data used to create many Media.
+     */
+    data: MediaCreateManyInput | MediaCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Media update
+   */
+  export type MediaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Media.
+     */
+    data: XOR<MediaUpdateInput, MediaUncheckedUpdateInput>
+    /**
+     * Choose, which Media to update.
+     */
+    where: MediaWhereUniqueInput
+  }
+
+  /**
+   * Media updateMany
+   */
+  export type MediaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Media.
+     */
+    data: XOR<MediaUpdateManyMutationInput, MediaUncheckedUpdateManyInput>
+    /**
+     * Filter which Media to update
+     */
+    where?: MediaWhereInput
+    /**
+     * Limit how many Media to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Media updateManyAndReturn
+   */
+  export type MediaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * The data used to update Media.
+     */
+    data: XOR<MediaUpdateManyMutationInput, MediaUncheckedUpdateManyInput>
+    /**
+     * Filter which Media to update
+     */
+    where?: MediaWhereInput
+    /**
+     * Limit how many Media to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Media upsert
+   */
+  export type MediaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Media to update in case it exists.
+     */
+    where: MediaWhereUniqueInput
+    /**
+     * In case the Media found by the `where` argument doesn't exist, create a new Media with this data.
+     */
+    create: XOR<MediaCreateInput, MediaUncheckedCreateInput>
+    /**
+     * In case the Media was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MediaUpdateInput, MediaUncheckedUpdateInput>
+  }
+
+  /**
+   * Media delete
+   */
+  export type MediaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * Filter which Media to delete.
+     */
+    where: MediaWhereUniqueInput
+  }
+
+  /**
+   * Media deleteMany
+   */
+  export type MediaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Media to delete
+     */
+    where?: MediaWhereInput
+    /**
+     * Limit how many Media to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Media without action
+   */
+  export type MediaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -2011,6 +4494,33 @@ export namespace Prisma {
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const ProductScalarFieldEnum: {
+    id: 'id',
+    sku: 'sku',
+    name: 'name',
+    altNames: 'altNames',
+    description: 'description',
+    stock: 'stock',
+    status: 'status',
+    price: 'price',
+    compareAt: 'compareAt',
+    brand: 'brand',
+    model: 'model'
+  };
+
+  export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+  export const MediaScalarFieldEnum: {
+    id: 'id',
+    url: 'url',
+    type: 'type',
+    productId: 'productId'
+  };
+
+  export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -2081,6 +4591,48 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductStatus'
+   */
+  export type EnumProductStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductStatus[]'
+   */
+  export type ListEnumProductStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MediaType'
+   */
+  export type EnumMediaTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaType'>
+    
+
+
+  /**
+   * Reference to a field of type 'MediaType[]'
+   */
+  export type ListEnumMediaTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaType[]'>
     
   /**
    * Deep Input Types
@@ -2172,6 +4724,143 @@ export namespace Prisma {
     lastLogin?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     privileges?: StringNullableListFilter<"User">
     profileImage?: StringWithAggregatesFilter<"User"> | string
+  }
+
+  export type ProductWhereInput = {
+    AND?: ProductWhereInput | ProductWhereInput[]
+    OR?: ProductWhereInput[]
+    NOT?: ProductWhereInput | ProductWhereInput[]
+    id?: StringFilter<"Product"> | string
+    sku?: StringFilter<"Product"> | string
+    name?: StringFilter<"Product"> | string
+    altNames?: StringNullableListFilter<"Product">
+    description?: StringFilter<"Product"> | string
+    stock?: IntFilter<"Product"> | number
+    status?: EnumProductStatusFilter<"Product"> | $Enums.ProductStatus
+    price?: FloatFilter<"Product"> | number
+    compareAt?: FloatNullableFilter<"Product"> | number | null
+    brand?: StringNullableFilter<"Product"> | string | null
+    model?: StringNullableFilter<"Product"> | string | null
+    media?: MediaListRelationFilter
+  }
+
+  export type ProductOrderByWithRelationInput = {
+    id?: SortOrder
+    sku?: SortOrder
+    name?: SortOrder
+    altNames?: SortOrder
+    description?: SortOrder
+    stock?: SortOrder
+    status?: SortOrder
+    price?: SortOrder
+    compareAt?: SortOrderInput | SortOrder
+    brand?: SortOrderInput | SortOrder
+    model?: SortOrderInput | SortOrder
+    media?: MediaOrderByRelationAggregateInput
+  }
+
+  export type ProductWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    sku?: string
+    AND?: ProductWhereInput | ProductWhereInput[]
+    OR?: ProductWhereInput[]
+    NOT?: ProductWhereInput | ProductWhereInput[]
+    name?: StringFilter<"Product"> | string
+    altNames?: StringNullableListFilter<"Product">
+    description?: StringFilter<"Product"> | string
+    stock?: IntFilter<"Product"> | number
+    status?: EnumProductStatusFilter<"Product"> | $Enums.ProductStatus
+    price?: FloatFilter<"Product"> | number
+    compareAt?: FloatNullableFilter<"Product"> | number | null
+    brand?: StringNullableFilter<"Product"> | string | null
+    model?: StringNullableFilter<"Product"> | string | null
+    media?: MediaListRelationFilter
+  }, "id" | "sku">
+
+  export type ProductOrderByWithAggregationInput = {
+    id?: SortOrder
+    sku?: SortOrder
+    name?: SortOrder
+    altNames?: SortOrder
+    description?: SortOrder
+    stock?: SortOrder
+    status?: SortOrder
+    price?: SortOrder
+    compareAt?: SortOrderInput | SortOrder
+    brand?: SortOrderInput | SortOrder
+    model?: SortOrderInput | SortOrder
+    _count?: ProductCountOrderByAggregateInput
+    _avg?: ProductAvgOrderByAggregateInput
+    _max?: ProductMaxOrderByAggregateInput
+    _min?: ProductMinOrderByAggregateInput
+    _sum?: ProductSumOrderByAggregateInput
+  }
+
+  export type ProductScalarWhereWithAggregatesInput = {
+    AND?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[]
+    OR?: ProductScalarWhereWithAggregatesInput[]
+    NOT?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Product"> | string
+    sku?: StringWithAggregatesFilter<"Product"> | string
+    name?: StringWithAggregatesFilter<"Product"> | string
+    altNames?: StringNullableListFilter<"Product">
+    description?: StringWithAggregatesFilter<"Product"> | string
+    stock?: IntWithAggregatesFilter<"Product"> | number
+    status?: EnumProductStatusWithAggregatesFilter<"Product"> | $Enums.ProductStatus
+    price?: FloatWithAggregatesFilter<"Product"> | number
+    compareAt?: FloatNullableWithAggregatesFilter<"Product"> | number | null
+    brand?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    model?: StringNullableWithAggregatesFilter<"Product"> | string | null
+  }
+
+  export type MediaWhereInput = {
+    AND?: MediaWhereInput | MediaWhereInput[]
+    OR?: MediaWhereInput[]
+    NOT?: MediaWhereInput | MediaWhereInput[]
+    id?: StringFilter<"Media"> | string
+    url?: StringFilter<"Media"> | string
+    type?: EnumMediaTypeFilter<"Media"> | $Enums.MediaType
+    productId?: StringFilter<"Media"> | string
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+  }
+
+  export type MediaOrderByWithRelationInput = {
+    id?: SortOrder
+    url?: SortOrder
+    type?: SortOrder
+    productId?: SortOrder
+    product?: ProductOrderByWithRelationInput
+  }
+
+  export type MediaWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MediaWhereInput | MediaWhereInput[]
+    OR?: MediaWhereInput[]
+    NOT?: MediaWhereInput | MediaWhereInput[]
+    url?: StringFilter<"Media"> | string
+    type?: EnumMediaTypeFilter<"Media"> | $Enums.MediaType
+    productId?: StringFilter<"Media"> | string
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+  }, "id">
+
+  export type MediaOrderByWithAggregationInput = {
+    id?: SortOrder
+    url?: SortOrder
+    type?: SortOrder
+    productId?: SortOrder
+    _count?: MediaCountOrderByAggregateInput
+    _max?: MediaMaxOrderByAggregateInput
+    _min?: MediaMinOrderByAggregateInput
+  }
+
+  export type MediaScalarWhereWithAggregatesInput = {
+    AND?: MediaScalarWhereWithAggregatesInput | MediaScalarWhereWithAggregatesInput[]
+    OR?: MediaScalarWhereWithAggregatesInput[]
+    NOT?: MediaScalarWhereWithAggregatesInput | MediaScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Media"> | string
+    url?: StringWithAggregatesFilter<"Media"> | string
+    type?: EnumMediaTypeWithAggregatesFilter<"Media"> | $Enums.MediaType
+    productId?: StringWithAggregatesFilter<"Media"> | string
   }
 
   export type UserCreateInput = {
@@ -2277,6 +4966,156 @@ export namespace Prisma {
     lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     privileges?: UserUpdateprivilegesInput | string[]
     profileImage?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ProductCreateInput = {
+    id?: string
+    sku: string
+    name: string
+    altNames?: ProductCreatealtNamesInput | string[]
+    description: string
+    stock?: number
+    status?: $Enums.ProductStatus
+    price: number
+    compareAt?: number | null
+    brand?: string | null
+    model?: string | null
+    media?: MediaCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductUncheckedCreateInput = {
+    id?: string
+    sku: string
+    name: string
+    altNames?: ProductCreatealtNamesInput | string[]
+    description: string
+    stock?: number
+    status?: $Enums.ProductStatus
+    price: number
+    compareAt?: number | null
+    brand?: string | null
+    model?: string | null
+    media?: MediaUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    altNames?: ProductUpdatealtNamesInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    price?: FloatFieldUpdateOperationsInput | number
+    compareAt?: NullableFloatFieldUpdateOperationsInput | number | null
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    media?: MediaUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    altNames?: ProductUpdatealtNamesInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    price?: FloatFieldUpdateOperationsInput | number
+    compareAt?: NullableFloatFieldUpdateOperationsInput | number | null
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+    media?: MediaUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductCreateManyInput = {
+    id?: string
+    sku: string
+    name: string
+    altNames?: ProductCreatealtNamesInput | string[]
+    description: string
+    stock?: number
+    status?: $Enums.ProductStatus
+    price: number
+    compareAt?: number | null
+    brand?: string | null
+    model?: string | null
+  }
+
+  export type ProductUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    altNames?: ProductUpdatealtNamesInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    price?: FloatFieldUpdateOperationsInput | number
+    compareAt?: NullableFloatFieldUpdateOperationsInput | number | null
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ProductUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    altNames?: ProductUpdatealtNamesInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    price?: FloatFieldUpdateOperationsInput | number
+    compareAt?: NullableFloatFieldUpdateOperationsInput | number | null
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MediaCreateInput = {
+    id?: string
+    url: string
+    type: $Enums.MediaType
+    product: ProductCreateNestedOneWithoutMediaInput
+  }
+
+  export type MediaUncheckedCreateInput = {
+    id?: string
+    url: string
+    type: $Enums.MediaType
+    productId: string
+  }
+
+  export type MediaUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    product?: ProductUpdateOneRequiredWithoutMediaNestedInput
+  }
+
+  export type MediaUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    productId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MediaCreateManyInput = {
+    id?: string
+    url: string
+    type: $Enums.MediaType
+    productId: string
+  }
+
+  export type MediaUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  }
+
+  export type MediaUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    productId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2451,6 +5290,209 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type EnumProductStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductStatus | EnumProductStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductStatusFilter<$PrismaModel> | $Enums.ProductStatus
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type MediaListRelationFilter = {
+    every?: MediaWhereInput
+    some?: MediaWhereInput
+    none?: MediaWhereInput
+  }
+
+  export type MediaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProductCountOrderByAggregateInput = {
+    id?: SortOrder
+    sku?: SortOrder
+    name?: SortOrder
+    altNames?: SortOrder
+    description?: SortOrder
+    stock?: SortOrder
+    status?: SortOrder
+    price?: SortOrder
+    compareAt?: SortOrder
+    brand?: SortOrder
+    model?: SortOrder
+  }
+
+  export type ProductAvgOrderByAggregateInput = {
+    stock?: SortOrder
+    price?: SortOrder
+    compareAt?: SortOrder
+  }
+
+  export type ProductMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sku?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    stock?: SortOrder
+    status?: SortOrder
+    price?: SortOrder
+    compareAt?: SortOrder
+    brand?: SortOrder
+    model?: SortOrder
+  }
+
+  export type ProductMinOrderByAggregateInput = {
+    id?: SortOrder
+    sku?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    stock?: SortOrder
+    status?: SortOrder
+    price?: SortOrder
+    compareAt?: SortOrder
+    brand?: SortOrder
+    model?: SortOrder
+  }
+
+  export type ProductSumOrderByAggregateInput = {
+    stock?: SortOrder
+    price?: SortOrder
+    compareAt?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EnumProductStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductStatus | EnumProductStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductStatusFilter<$PrismaModel>
+    _max?: NestedEnumProductStatusFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type EnumMediaTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MediaType | EnumMediaTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMediaTypeFilter<$PrismaModel> | $Enums.MediaType
+  }
+
+  export type ProductScalarRelationFilter = {
+    is?: ProductWhereInput
+    isNot?: ProductWhereInput
+  }
+
+  export type MediaCountOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    type?: SortOrder
+    productId?: SortOrder
+  }
+
+  export type MediaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    type?: SortOrder
+    productId?: SortOrder
+  }
+
+  export type MediaMinOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    type?: SortOrder
+    productId?: SortOrder
+  }
+
+  export type EnumMediaTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MediaType | EnumMediaTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMediaTypeWithAggregatesFilter<$PrismaModel> | $Enums.MediaType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMediaTypeFilter<$PrismaModel>
+    _max?: NestedEnumMediaTypeFilter<$PrismaModel>
+  }
+
   export type UserCreateprivilegesInput = {
     set: string[]
   }
@@ -2474,6 +5516,103 @@ export namespace Prisma {
   export type UserUpdateprivilegesInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type ProductCreatealtNamesInput = {
+    set: string[]
+  }
+
+  export type MediaCreateNestedManyWithoutProductInput = {
+    create?: XOR<MediaCreateWithoutProductInput, MediaUncheckedCreateWithoutProductInput> | MediaCreateWithoutProductInput[] | MediaUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: MediaCreateOrConnectWithoutProductInput | MediaCreateOrConnectWithoutProductInput[]
+    createMany?: MediaCreateManyProductInputEnvelope
+    connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+  }
+
+  export type MediaUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<MediaCreateWithoutProductInput, MediaUncheckedCreateWithoutProductInput> | MediaCreateWithoutProductInput[] | MediaUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: MediaCreateOrConnectWithoutProductInput | MediaCreateOrConnectWithoutProductInput[]
+    createMany?: MediaCreateManyProductInputEnvelope
+    connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+  }
+
+  export type ProductUpdatealtNamesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EnumProductStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ProductStatus
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type MediaUpdateManyWithoutProductNestedInput = {
+    create?: XOR<MediaCreateWithoutProductInput, MediaUncheckedCreateWithoutProductInput> | MediaCreateWithoutProductInput[] | MediaUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: MediaCreateOrConnectWithoutProductInput | MediaCreateOrConnectWithoutProductInput[]
+    upsert?: MediaUpsertWithWhereUniqueWithoutProductInput | MediaUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: MediaCreateManyProductInputEnvelope
+    set?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    disconnect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    delete?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    update?: MediaUpdateWithWhereUniqueWithoutProductInput | MediaUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: MediaUpdateManyWithWhereWithoutProductInput | MediaUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: MediaScalarWhereInput | MediaScalarWhereInput[]
+  }
+
+  export type MediaUncheckedUpdateManyWithoutProductNestedInput = {
+    create?: XOR<MediaCreateWithoutProductInput, MediaUncheckedCreateWithoutProductInput> | MediaCreateWithoutProductInput[] | MediaUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: MediaCreateOrConnectWithoutProductInput | MediaCreateOrConnectWithoutProductInput[]
+    upsert?: MediaUpsertWithWhereUniqueWithoutProductInput | MediaUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: MediaCreateManyProductInputEnvelope
+    set?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    disconnect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    delete?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    update?: MediaUpdateWithWhereUniqueWithoutProductInput | MediaUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: MediaUpdateManyWithWhereWithoutProductInput | MediaUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: MediaScalarWhereInput | MediaScalarWhereInput[]
+  }
+
+  export type ProductCreateNestedOneWithoutMediaInput = {
+    create?: XOR<ProductCreateWithoutMediaInput, ProductUncheckedCreateWithoutMediaInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutMediaInput
+    connect?: ProductWhereUniqueInput
+  }
+
+  export type EnumMediaTypeFieldUpdateOperationsInput = {
+    set?: $Enums.MediaType
+  }
+
+  export type ProductUpdateOneRequiredWithoutMediaNestedInput = {
+    create?: XOR<ProductCreateWithoutMediaInput, ProductUncheckedCreateWithoutMediaInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutMediaInput
+    upsert?: ProductUpsertWithoutMediaInput
+    connect?: ProductWhereUniqueInput
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutMediaInput, ProductUpdateWithoutMediaInput>, ProductUncheckedUpdateWithoutMediaInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2608,6 +5747,254 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumProductStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductStatus | EnumProductStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductStatusFilter<$PrismaModel> | $Enums.ProductStatus
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedEnumProductStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductStatus | EnumProductStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductStatus[] | ListEnumProductStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProductStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductStatusFilter<$PrismaModel>
+    _max?: NestedEnumProductStatusFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMediaTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MediaType | EnumMediaTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMediaTypeFilter<$PrismaModel> | $Enums.MediaType
+  }
+
+  export type NestedEnumMediaTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MediaType | EnumMediaTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMediaTypeWithAggregatesFilter<$PrismaModel> | $Enums.MediaType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMediaTypeFilter<$PrismaModel>
+    _max?: NestedEnumMediaTypeFilter<$PrismaModel>
+  }
+
+  export type MediaCreateWithoutProductInput = {
+    id?: string
+    url: string
+    type: $Enums.MediaType
+  }
+
+  export type MediaUncheckedCreateWithoutProductInput = {
+    id?: string
+    url: string
+    type: $Enums.MediaType
+  }
+
+  export type MediaCreateOrConnectWithoutProductInput = {
+    where: MediaWhereUniqueInput
+    create: XOR<MediaCreateWithoutProductInput, MediaUncheckedCreateWithoutProductInput>
+  }
+
+  export type MediaCreateManyProductInputEnvelope = {
+    data: MediaCreateManyProductInput | MediaCreateManyProductInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MediaUpsertWithWhereUniqueWithoutProductInput = {
+    where: MediaWhereUniqueInput
+    update: XOR<MediaUpdateWithoutProductInput, MediaUncheckedUpdateWithoutProductInput>
+    create: XOR<MediaCreateWithoutProductInput, MediaUncheckedCreateWithoutProductInput>
+  }
+
+  export type MediaUpdateWithWhereUniqueWithoutProductInput = {
+    where: MediaWhereUniqueInput
+    data: XOR<MediaUpdateWithoutProductInput, MediaUncheckedUpdateWithoutProductInput>
+  }
+
+  export type MediaUpdateManyWithWhereWithoutProductInput = {
+    where: MediaScalarWhereInput
+    data: XOR<MediaUpdateManyMutationInput, MediaUncheckedUpdateManyWithoutProductInput>
+  }
+
+  export type MediaScalarWhereInput = {
+    AND?: MediaScalarWhereInput | MediaScalarWhereInput[]
+    OR?: MediaScalarWhereInput[]
+    NOT?: MediaScalarWhereInput | MediaScalarWhereInput[]
+    id?: StringFilter<"Media"> | string
+    url?: StringFilter<"Media"> | string
+    type?: EnumMediaTypeFilter<"Media"> | $Enums.MediaType
+    productId?: StringFilter<"Media"> | string
+  }
+
+  export type ProductCreateWithoutMediaInput = {
+    id?: string
+    sku: string
+    name: string
+    altNames?: ProductCreatealtNamesInput | string[]
+    description: string
+    stock?: number
+    status?: $Enums.ProductStatus
+    price: number
+    compareAt?: number | null
+    brand?: string | null
+    model?: string | null
+  }
+
+  export type ProductUncheckedCreateWithoutMediaInput = {
+    id?: string
+    sku: string
+    name: string
+    altNames?: ProductCreatealtNamesInput | string[]
+    description: string
+    stock?: number
+    status?: $Enums.ProductStatus
+    price: number
+    compareAt?: number | null
+    brand?: string | null
+    model?: string | null
+  }
+
+  export type ProductCreateOrConnectWithoutMediaInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutMediaInput, ProductUncheckedCreateWithoutMediaInput>
+  }
+
+  export type ProductUpsertWithoutMediaInput = {
+    update: XOR<ProductUpdateWithoutMediaInput, ProductUncheckedUpdateWithoutMediaInput>
+    create: XOR<ProductCreateWithoutMediaInput, ProductUncheckedCreateWithoutMediaInput>
+    where?: ProductWhereInput
+  }
+
+  export type ProductUpdateToOneWithWhereWithoutMediaInput = {
+    where?: ProductWhereInput
+    data: XOR<ProductUpdateWithoutMediaInput, ProductUncheckedUpdateWithoutMediaInput>
+  }
+
+  export type ProductUpdateWithoutMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    altNames?: ProductUpdatealtNamesInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    price?: FloatFieldUpdateOperationsInput | number
+    compareAt?: NullableFloatFieldUpdateOperationsInput | number | null
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ProductUncheckedUpdateWithoutMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sku?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    altNames?: ProductUpdatealtNamesInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
+    stock?: IntFieldUpdateOperationsInput | number
+    status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
+    price?: FloatFieldUpdateOperationsInput | number
+    compareAt?: NullableFloatFieldUpdateOperationsInput | number | null
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    model?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MediaCreateManyProductInput = {
+    id?: string
+    url: string
+    type: $Enums.MediaType
+  }
+
+  export type MediaUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  }
+
+  export type MediaUncheckedUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  }
+
+  export type MediaUncheckedUpdateManyWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   }
 
 

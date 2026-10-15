@@ -135,6 +135,27 @@ exports.Prisma.UserScalarFieldEnum = {
   profileImage: 'profileImage'
 };
 
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  sku: 'sku',
+  name: 'name',
+  altNames: 'altNames',
+  description: 'description',
+  stock: 'stock',
+  status: 'status',
+  price: 'price',
+  compareAt: 'compareAt',
+  brand: 'brand',
+  model: 'model'
+};
+
+exports.Prisma.MediaScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  type: 'type',
+  productId: 'productId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -149,10 +170,21 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.ProductStatus = exports.$Enums.ProductStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  DELETED: 'DELETED'
+};
 
+exports.MediaType = exports.$Enums.MediaType = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Product: 'Product',
+  Media: 'Media'
 };
 
 /**
