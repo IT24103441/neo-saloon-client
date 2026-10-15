@@ -1,12 +1,18 @@
-import { getUser } from "@/utils/authentication";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { isPrivileged } from "@/utils/authentication";
 
 export async function GET(request: NextRequest) {
 
-    const user = await getUser(request);
+}
 
-    console.log("User: ", user);
+export async function POST(request: NextRequest) {
+    const hasPrivilege = await isPrivileged(request, "products:add")
 
-    console.log("GET request received at /api/products");
+    if (hasPrivilege) {
 
+        const body = await request.json()
+
+    } else {
+        return NextResponse.json({ message: "You do not have the required privilege to add a product" }, { status: 403 })
+    }
 }
