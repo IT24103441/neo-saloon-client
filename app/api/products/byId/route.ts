@@ -1,4 +1,4 @@
-import { ProductStatus } from "@/app/generated/prisma/enums";
+import { ProductStatus } from "@/app/generated/prisma";
 import prisma from "@/lib/prisma";
 import { isPrivileged } from "@/utils/authentication";
 import { NextRequest, NextResponse } from "next/server";
