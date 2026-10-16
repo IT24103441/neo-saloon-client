@@ -1,4 +1,4 @@
-import { MediaType, ProductStatus } from "@/app/generated/prisma/enums";
+import { MediaType, ProductStatus } from "@/app/generated/prisma";
 import z from "zod";
 import { MediaArraySchema } from "./ProductCreationRequest";
 

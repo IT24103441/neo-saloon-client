@@ -1,5 +1,5 @@
 import z from "zod";
-
+import { MediaType, ProductStatus } from "@/app/generated/prisma";
 
 const ProductStatusEnum = z.enum(ProductStatus);
 const MediaTypeEnum = z.enum(MediaType);

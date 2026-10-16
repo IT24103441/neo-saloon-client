@@ -4,7 +4,7 @@ import ProductCreationRequestSchema, { MediaArraySchema } from "@/types/dto/Prod
 import z from "zod";
 import prisma from "@/lib/prisma";
 import getPaginationInfo from "@/utils/pageInfoRetrieval";
-import { ProductStatus } from "@/app/generated/prisma/enums";
+import { ProductStatus } from "@/app/generated/prisma";
 import ProductUpdateRequestSchema from "@/types/dto/ProductUpdateRequest";
 
 export async function GET(request: NextRequest) {
