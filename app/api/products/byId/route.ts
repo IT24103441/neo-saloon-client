@@ -11,6 +11,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ message: "Product id is required" }, { status: 400 })
     }
 
+
     try {
         const product = await prisma.product.findUnique({
             where: {
